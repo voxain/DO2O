@@ -1,0 +1,238 @@
+@keyframes flyInBottom
+    0%
+        transform: translateY(100%)
+        width: 0
+    50%
+        transform: translateY(100%) rotateX(100deg)
+        width: 13rem
+        opacity: 0
+    100%
+        transform: translateY(0) rotateX(0deg)
+        opacity: 1
+@keyframes bounce
+    0%, 100%
+        transform: scale(1)
+        opacity: .8
+    50%
+        transform: scale(1.05)
+        opacity: 1
+        box-shadow: 0px 0px 10px white
+    
+html, body
+    margin: 0
+    padding: 0
+    width: 100vw
+    height: 100vh
+
+body
+    background: url('https://images.squarespace-cdn.com/content/v1/5b76af6eb10598ab8a9f2588/1535205202521-YJVU8OK3QV41F5246Q33/STSLev2-BruceBrenneise')
+    background-size: cover
+
+.info
+    color: #22aeff
+
+.topbar
+    position: fixed
+    width: 100%
+    height: 4rem
+    background: rgba(0,0,0,.6)
+    backdrop-filter: blur(30px)
+    border-bottom: 3px solid rgba(255,255,255,.1)
+    display: flex
+    flex-direction: row
+    align-items: center
+    font-family: 'Poppins'
+    font-size: 1.5rem
+    color: white
+    .item
+        height: 100%
+        width: auto
+        padding-left: 1rem
+        display: flex
+        flex-direction: row
+        align-items: center 
+        &.player
+            flex-direction: column
+            justify-content: center 
+
+        .subtitle
+
+.card
+    width: 13rem
+    height: 21rem
+    display: flex
+    flex-direction: column
+    align-items: center
+    overflow: hidden
+    z-index:1
+    transition: .3s ease
+    margin: .5rem
+    animation: flyInBottom .6s cubic-bezier(0, 0.6, 0.49, 0.99)
+
+    background: linear-gradient(180deg, #d3bb97, #bbae84)
+    border-radius: 15px
+    box-shadow: inset 1px 1px 5px rgba(255, 255, 255, 1), inset -1px -1px 5px rgba(0,0,0, .4), 0 1rem 2rem rgba(14, 15, 27, 0.192)
+
+    &:hover
+        transform: translateY(-9rem) scale(1.3) !important
+        z-index: 10 
+    &:hover .image img
+        transform: scale(1.1)
+
+    .title
+        width: 100%
+        height: 3rem
+        background: linear-gradient(90deg, #fff0, #ffff, #fff0)
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        font-size: 1.4rem
+        font-family: Calvert MT Std
+        font-weight: bold
+        box-shadow: 0 0rem 1.5rem rgba(14, 15, 27, 0.3)
+        &.uncommon
+            text-shadow: 0 0px 10px #00ccff
+        &.rare
+            text-shadow: 0 0px 4px #00000099
+            color: #ff2bed
+        &.legendary
+            color: #ffb95e
+            box-shadow: 0 0rem 1.5rem #ff9100
+            background: linear-gradient(90deg, #ff910055, #ff9100ff, #ff910055)
+            text-shadow: 0 0px 5px #000000
+
+        .type
+            font-size: .7rem
+            font-family: Calvert MT Std
+            text-shadow: none
+            color: #000000aa
+            text-transform: uppercase
+
+    .text
+        flex: 1
+        width: calc(100% - 4rem)
+        font-size: .8rem
+        text-align: center
+        font-family: Italianate
+        background: #e2d8c4aa
+        margin: 1rem
+        margin-top: 0
+        overflow: hidden
+        padding: 1rem
+        border-radius: 0 0 12px 12px
+
+        .badge
+            padding: .2rem
+            border-radius: 7px
+            margin-bottom: .5rem
+            font-family: 'Poppins'
+            font-style: italic
+            font-weight: bold
+            letter-spacing: 2px
+            transition: .2s ease !important
+            transform: scale(1)
+            z-index: 0
+            &.purple
+                box-shadow: 0 0 1rem #e72bf8aa
+                background: #9e15aa
+                color: white
+            &.blue
+                box-shadow: 0 0 1rem #2badf8aa
+                background: #157baa
+                color: white
+            &.green
+                box-shadow: 0 0 1rem #2bf83caa
+                background: #33aa15
+                color: white
+
+    .image
+        width: 100%
+        height: 40%
+        box-sizing: border-box
+        background: transparent
+        padding-bottom: 0
+        overflow: hidden
+
+        img
+            width: 100%
+            height: 100%
+            border-radius: 12px 12px 0 0
+            object-fit: cover
+            transition: .3s ease
+
+.draggable-mirror
+    transition: none !important
+    transform: scale(2)
+    opacity: 1 !important
+    animation: none !important
+    .text 
+        .badge
+            animation: bounce 2s ease infinite
+
+.draggable-container--over
+    background: rgba(0,0,0,.5) !important
+    border-top: 3px dotted rgba(255,255,255,.4) !important
+
+.draggable-container--over > .draggable-source--is-dragging
+    width: 13rem
+    margin: .5rem
+
+
+.draggable-source--is-dragging
+    background: rgba(0,0,0,.2)
+    margin: 0
+    width: 0
+    &:hover
+        transform: none !important
+    & *
+        opacity: 0 !important
+
+.draggable-container--is-dragging > .card
+    transform: translateY(2rem)
+    opacity: .7
+    //animation: flyInBottom .2s ease-out
+
+.hand
+    width: 100%
+    height: 17rem
+    position: fixed
+    bottom: 0
+    left: 0
+    transition: .2s ease
+    border-top: 3px solid transparent
+    perspective: 500px
+
+    display: flex
+    flex-direction: row
+    justify-content: center
+
+.tippy-content
+    padding: 1rem 1.5rem 
+    font-family: 'Poppins'
+    font-size: 1rem
+.tippy-box
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.4)
+    border-radius: 12px
+    background: rgba(0,0,0,.6)
+    backdrop-filter: blur(30px)
+    border: 3px solid rgba(255,255,255,.1)
+
+.tippy-headline
+    font-weight: 800
+    font-size: 1.3rem
+    &.purple
+        color: #ef54fd
+    &.blue
+        color: #42c0fa
+    &.green
+        color: #80ff60
+    &.red
+        color: #ff6060
+    &.yellow
+        color: #ffe760
+
+.tippy-subtitle
+    font-size: .8rem
+    color: rgba(255,255,255,.3)
+    font-weight: 600
